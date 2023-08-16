@@ -1,5 +1,8 @@
 library(stars)
 library(sf)
+library(tidyverse)
+library(magrittr)
+library(progress)
 
 chirps_rast <- read_stars("chirps.tif")
 vnm_shp <- read_sf("gadm41_VNM_2.shp")
