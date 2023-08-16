@@ -1,0 +1,10 @@
+Package: spagr
+Title: Spatially aggregate rasters to polygons
+Version: 0.0.0.9000
+Authors@R: 
+    person("Tuyen", "Huynh", , "tuyenhn@oucru.org", role = c("aut", "cre"))
+Description: Spatially aggregates data from raster pixels to polygons using various methods.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
