@@ -9,7 +9,7 @@ vnm_shp <- read_rds("gadm41_VNM_1_pk.rds") %>%
   terra::unwrap() %>%
   st_as_sf()
 
-spagr <- function(rast, shp, method = 1, show_progress = TRUE,...) {
+spagr <- function(rast, shp, id_col, method = 1, show_progress = TRUE, ...) {
   if (!inherits(rast, "stars")) {
     stop("`rast` has to be a `stars` object")
   }
@@ -27,21 +27,27 @@ spagr <- function(rast, shp, method = 1, show_progress = TRUE,...) {
   spagr_(
     rast = rast,
     shp = shp,
+    id_col = id_col,
     method = method,
     show_progress = show_progress
   )
 }
 
-spagr_ <- function(rast, shp, method, show_progress) {
+spagr_ <- function(rast, shp, id_col, method, show_progress) {
   methods <- c(method_1, method_2, method_3)
   method <- methods[[method]]
 
   rast <- st_crop(rast, shp)
 
-  method(rast = rast, shp = shp, show_progress = show_progress)
+  method(
+    rast = rast,
+    shp = shp,
+    id_col = id_col,
+    show_progress = show_progress
+  )
 }
 
-method_1 <- function(rast, shp, show_progress) {
+method_1 <- function(rast, shp, id_col, show_progress) {
   res_df <- tibble(id = character(), agg_val = double())
 
   if(show_progress)
