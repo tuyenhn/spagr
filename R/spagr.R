@@ -5,7 +5,9 @@ library(magrittr)
 library(progress)
 
 chirps_rast <- read_stars("chirps.tif")
-vnm_shp <- read_sf("gadm41_VNM_2.shp")
+vnm_shp <- read_rds("gadm41_VNM_1_pk.rds") %>%
+  terra::unwrap() %>%
+  st_as_sf()
 
 spagr <- function(rast, shp, method = 1, show_progress = TRUE,...) {
   if (class(rast)[1] != "stars") {
