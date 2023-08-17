@@ -10,20 +10,17 @@ vnm_shp <- read_rds("gadm41_VNM_1_pk.rds") %>%
   st_as_sf()
 
 spagr <- function(rast, shp, method = 1, show_progress = TRUE,...) {
-  if (class(rast)[1] != "stars") {
-    print("`rast` has to be a `stars` object")
-    return
+  if (!inherits(rast, "stars")) {
+    stop("`rast` has to be a `stars` object")
   }
-  if (class(shp)[1] != "sf") {
-    print("`shp` has to be an `sf` object")
-    return
+  if (!inherits(shp, "sf")) {
+    stop("`shp` has to be an `sf` object")
   }
-  if (class(method) != "numeric" && class(method) != "function") {
-    print("`method` has to be a number between 1-3 or a defined function")
-    return
+  if (!inherits(id_col, "character") || !(id_col %in% colnames(shp))) {
+    stop("`id_col` has to be a column name in `shp`")
   }
-  if (!(method %in% c(1, 2, 3))) {
-    print("`method` has to be a number between 1-3")
+  if (!inherits(method, "numeric") || !(method %in% c(1, 2, 3))) {
+    stop("`method` has to be a number between 1-3")
     return
   }
 
